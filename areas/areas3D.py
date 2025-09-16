@@ -82,6 +82,141 @@ class Areas3D:
         except ValueError:
             print("Error: Entrada inválida. Debe ingresar valores numéricos.")
             return None
+    def area_prisma_rectangular(self):
+        try:
+            l = float(input("Largo: "))
+            w = float(input("Ancho: "))
+            h = float(input("Altura: "))
+            if l < 0 or w < 0 or h < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            return 2 * (l*w + l*h + w*h)
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_cono(self):
+        try:
+            r = float(input("Radio: "))
+            h = float(input("Altura: "))
+            if r < 0 or h < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            g = math.sqrt(r**2 + h**2)
+            return math.pi * r * (r + g)
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_tetraedro(self):
+        try:
+            a = float(input("Arista: "))
+            if a < 0:
+                print("Error: La arista no puede ser negativa.")
+                return None
+            return math.sqrt(3) * a**2
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_octaedro(self):
+        try:
+            a = float(input("Arista: "))
+            if a < 0:
+                print("Error: La arista no puede ser negativa.")
+                return None
+            return 2 * math.sqrt(3) * a**2
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_dodecaedro(self):
+        try:
+            a = float(input("Arista: "))
+            if a < 0:
+                print("Error: La arista no puede ser negativa.")
+                return None
+            return 3 * math.sqrt(25 + 10*math.sqrt(5)) * a**2
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_icosaedro(self):
+        try:
+            a = float(input("Arista: "))
+            if a < 0:
+                print("Error: La arista no puede ser negativa.")
+                return None
+            return 5 * math.sqrt(3) * a**2
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_prisma_triangular(self):
+        try:
+            a = float(input("Arista del triángulo: "))
+            h = float(input("Altura del prisma: "))
+            if a < 0 or h < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            area_base = (math.sqrt(3)/4) * a**2
+            perimetro = 3*a
+            return 2*area_base + perimetro*h
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_prisma_hexagonal(self):
+        try:
+            a = float(input("Arista del hexágono: "))
+            h = float(input("Altura del prisma: "))
+            if a < 0 or h < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            area_base = (3*math.sqrt(3)/2) * a**2
+            perimetro = 6*a
+            return 2*area_base + perimetro*h
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_piramide_cuadrada(self):
+        try:
+            l = float(input("Lado de la base: "))
+            g = float(input("Apotema: "))
+            if l < 0 or g < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            return l**2 + 2*l*g
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_tronco_cono(self):
+        try:
+            r1 = float(input("Radio mayor: "))
+            r2 = float(input("Radio menor: "))
+            h = float(input("Altura: "))
+            if r1 < 0 or r2 < 0 or h < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            g = math.sqrt((r1-r2)**2 + h**2)
+            return math.pi*(r1+r2)*g + math.pi*(r1**2 + r2**2)
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
+
+    def area_toro(self):
+        try:
+            R = float(input("Radio mayor (centro al círculo): "))
+            r = float(input("Radio menor (círculo): "))
+            if R < 0 or r < 0:
+                print("Error: Dimensiones negativas no válidas.")
+                return None
+            return 4*math.pi**2 * R * r
+        except ValueError:
+            print("Error: Entrada inválida.")
+            return None
 
 
 if __name__ == "__main__":
