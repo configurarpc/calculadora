@@ -1,3 +1,7 @@
+import io
+import contextlib
+from unittest.mock import patch
+
 try:
     from IrrAreas import InterfazPoligonoIrregular
 except ImportError:
@@ -42,6 +46,39 @@ def ejecutar_pruebas():
         print(f" ÉXITO: La clase lanzó correctamente un error: '{e}'")
     except Exception as e:
         print(f" FALLO: Se lanzó un error diferente al esperado: {e}")
+
+
+    # --- PRUEBA 3: Funcionamiento del menú interactivo ---
+    print("\n[Prueba 3: Bucle y salida del menú principal]")
+    try:
+        # Simulamos una secuencia de entradas del usuario:
+        # 1. '1': Elige la opción de crear un polígono.
+        # 2. '0,0', '1,0', '1,1': Vértices del polígono.
+        # 3. 'fin': Termina de añadir vértices.
+        # 4. '2': Elige la opción de salir del menú.
+        entradas_simuladas = ['1', '0,0', '1,0', '1,1', 'fin', '2']
+
+        # Usamos 'patch' para reemplazar la función input() por nuestra lista de entradas.
+        # 'side_effect' hace que en cada llamada a input() se retorne el siguiente elemento de la lista.
+        with patch('builtins.input', side_effect=entradas_simuladas):
+            # Capturamos todo lo que se imprima en la consola para verificarlo.
+            f = io.StringIO()
+            with contextlib.redirect_stdout(f):
+                InterfazPoligonoIrregular.ejecutar() # Llamamos a la función que contiene el menú.
+            salida_consola = f.getvalue() # Obtenemos el texto capturado.
+
+        # Verificamos que el menú se mostró, se calculó el área y luego se salió.
+        assert "--- Menú de Área de Polígono ---" in salida_consola
+        assert "Resultado: El área del polígono es:" in salida_consola
+        assert "Volviendo al menú principal..." in salida_consola
+        # El menú debe aparecer 2 veces: una para la operación y otra antes de salir.
+        assert salida_consola.count("--- Menú de Área de Polígono ---") == 2
+
+        print(" ÉXITO: El menú se ejecutó, completó una operación, se volvió a mostrar y finalizó correctamente.")
+
+    except Exception as e:
+        print(f" FALLO: La prueba del menú generó un error inesperado: {e}")
+
 
     print("\n--- Pruebas finalizadas ---")
 
