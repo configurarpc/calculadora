@@ -1,7 +1,6 @@
-from areas2D import Areas2D
+#from areas1D import Areas1D
 from areas3D import Areas3D
-
-" Clase principal de los cálculos de Áreas"
+#from areasCustom import AreasCustom
 
 class Areas:
     def mostrar_menu(self):
@@ -24,4 +23,3 @@ class Areas:
                 break
             else:
                 print("Opción no válida.")
-
