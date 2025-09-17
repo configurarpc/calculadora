@@ -1,6 +1,6 @@
-from areas2D import Areas2D
-from areas3D import Areas3D
-from IrrAreas import InterfazPoligonoIrregular
+from .areas2D import Areas2D
+from .areas3D import Areas3D
+from .IrrAreas import InterfazPoligonoIrregular
 
 " Clase principal de los cálculos de Áreas"
 
