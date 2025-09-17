@@ -1,11 +1,13 @@
 from arithmetic.arithmetic import Aritmetica
 from areas.areas import Areas
+from trigonometry.trig import CalculadoraTrigonometrica
 
 def main():
     while True:
         print("\n=== Calculadora ===")
         print("1. Aritmética")
         print("2. Áreas")
+        print("3. Trigonometría")
         print("0. Salir")
         opcion = input("Seleccione una opción: ")
 
@@ -13,6 +15,8 @@ def main():
             Aritmetica().mostrar_menu()
         elif opcion == "2":
             Areas().mostrar_menu()
+        elif opcion == "3":
+            CalculadoraTrigonometrica().mostrar_menu()
         elif opcion == "0":
             print("Saliendo...")
             break
