@@ -7,26 +7,15 @@ class CalculadoraTrigonometrica:
     """
 
     def __init__(self, mode='grados'):
-        """
-        Inicializa la calculadora.
-
-        Args:
-            mode (str): El modo de operación. Puede ser 'grados' o 'radianes'.
-                        Por defecto, es 'grados'.
-        """
-        if mode not in ['grados', 'radianes']:
-            raise ValueError("El modo debe ser 'grados' o 'radianes'")
         self.mode = mode
-        print(f"Calculadora iniciada en modo: {self.mode}")
 
-    # --- Métodos de Conversión Internos ---
     def _grados_a_radianes(self, grados):
         return math.radians(grados)
 
     def _radianes_a_grados(self, radianes):
         return math.degrees(radianes)
-
-    # --- Funciones Trigonométricas Principales ---
+    
+    # --- Métodos de cálculo (sin cambios) ---
     def seno(self, angulo):
         angulo_en_radianes = angulo if self.mode == 'radianes' else self._grados_a_radianes(angulo)
         return math.sin(angulo_en_radianes)
@@ -37,39 +26,28 @@ class CalculadoraTrigonometrica:
 
     def tangente(self, angulo):
         if self.mode == 'grados' and angulo % 180 == 90:
-            return float('inf') # Indeterminado
+            return float('inf')
         angulo_en_radianes = angulo if self.mode == 'radianes' else self._grados_a_radianes(angulo)
         return math.tan(angulo_en_radianes)
 
-    # --- Funciones Trigonométricas Recíprocas ---
     def cosecante(self, angulo):
-        """Calcula la cosecante (1 / seno)."""
         seno_val = self.seno(angulo)
         if seno_val == 0:
-            return float('inf') # Indeterminado (división por cero)
+            return float('inf')
         return 1 / seno_val
 
     def secante(self, angulo):
-        """Calcula la secante (1 / coseno)."""
         coseno_val = self.coseno(angulo)
-        if coseno_val == 0:
-            return float('inf') # Indeterminado (división por cero)
+        if round(coseno_val, 10) == 0:
+            return float('inf')
         return 1 / coseno_val
 
     def cotangente(self, angulo):
-        """Calcula la cotangente (1 / tangente)."""
-        tangente_val = self.tangente(angulo)
-        if tangente_val == 0:
-            return float('inf') # Indeterminado
-        # Para evitar problemas de precisión con tangente cerca del infinito
-        coseno_val = self.coseno(angulo)
         seno_val = self.seno(angulo)
-        if seno_val == 0:
+        if round(seno_val, 10) == 0:
            return float('inf')
-        return coseno_val / seno_val
-
-
-    # --- Funciones Trigonométricas Inversas Principales ---
+        return self.coseno(angulo) / seno_val
+    
     def arcoseno(self, valor):
         if not -1 <= valor <= 1:
             raise ValueError("El valor para arcoseno debe estar entre -1 y 1.")
@@ -86,22 +64,79 @@ class CalculadoraTrigonometrica:
         resultado_rad = math.atan(valor)
         return self._radianes_a_grados(resultado_rad) if self.mode == 'grados' else resultado_rad
 
-    # --- Funciones Trigonométricas Inversas Recíprocas ---
     def arcocosecante(self, valor):
-        """Calcula la arcocosecante (arcoseno de 1/valor)."""
         if -1 < valor < 1:
             raise ValueError("El valor para arcocosecante debe ser >= 1 o <= -1.")
         return self.arcoseno(1 / valor)
 
     def arcosecante(self, valor):
-        """Calcula la arcosecante (arcocoseno de 1/valor)."""
         if -1 < valor < 1:
             raise ValueError("El valor para arcosecante debe ser >= 1 o <= -1.")
         return self.arcocoseno(1 / valor)
 
     def arcocotangente(self, valor):
-        """Calcula la arcocotangente (arcotangente de 1/valor)."""
         if valor == 0:
-            # El arcotangente de infinito es 90 grados o PI/2 radianes
             return 90.0 if self.mode == 'grados' else math.pi / 2
         return self.arcotangente(1 / valor)
+
+    # --- Menú interactivo ---
+    def mostrar_menu(self):
+        while True:
+            print(f"\n--- Menú de Trigonometría (Modo: {self.mode}) ---")
+            print("1. Seno (sin)")
+            print("2. Coseno (cos)")
+            print("3. Tangente (tan)")
+            print("4. Cosecante (csc)")
+            print("5. Secante (sec)")
+            print("6. Cotangente (cot)")
+            print("7. Arcoseno (asin)")
+            print("8. Arcocoseno (acos)")
+            print("9. Arcotangente (atan)")
+            print("10. Arcocosecante (acsc)")
+            print("11. Arcosecante (asec)")
+            print("12. Arcotangente (acot)")
+            print("99. Cambiar Modo (grados/radianes)")
+            print("0. Volver al menú principal")
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == '0':
+                break
+            
+            if opcion == '99':
+                self.mode = 'radianes' if self.mode == 'grados' else 'grados'
+                print(f"Modo cambiado a: {self.mode}")
+                continue
+
+            # Diccionarios para mapear opciones a funciones
+            funciones_angulares = {
+                '1': ('Seno', self.seno), '2': ('Coseno', self.coseno),
+                '3': ('Tangente', self.tangente), '4': ('Cosecante', self.cosecante),
+                '5': ('Secante', self.secante), '6': ('Cotangente', self.cotangente),
+            }
+            funciones_inversas = {
+                '7': ('Arcoseno', self.arcoseno), '8': ('Arcocoseno', self.arcocoseno),
+                '9': ('Arcotangente', self.arcotangente), '10': ('Arcocosecante', self.arcocosecante),
+                '11': ('Arcosecante', self.arcosecante), '12': ('Arcocotangente', self.arcocotangente)
+            }
+
+            try:
+                if opcion in funciones_angulares:
+                    unidad = "grados" if self.mode == 'grados' else "radianes"
+                    valor = float(input(f"Ingrese el ángulo en {unidad}: "))
+                    nombre_func, func = funciones_angulares[opcion]
+                    resultado = func(valor)
+                    print(f"El {nombre_func} de {valor} {unidad} es: {resultado}")
+
+                elif opcion in funciones_inversas:
+                    valor = float(input("Ingrese el valor para calcular el ángulo: "))
+                    nombre_func, func = funciones_inversas[opcion]
+                    resultado = func(valor)
+                    unidad = "°" if self.mode == 'grados' else " rad"
+                    print(f"El {nombre_func} de {valor} es: {resultado}{unidad}")
+
+                else:
+                    print("Opción no válida.")
+            except ValueError as e:
+                print(f"Error: {e}. Ingrese un número válido.")
+            except Exception as e:
+                print(f"Ocurrió un error inesperado: {e}")
