@@ -1,6 +1,7 @@
 from arithmetic.arithmetic import Aritmetica
 from areas.areas import Areas
 from trigonometry.trig import CalculadoraTrigonometrica
+from coolstuff import FrasesDesarrollador
 
 def main():
     while True:
@@ -18,8 +19,9 @@ def main():
         elif opcion == "3":
             CalculadoraTrigonometrica().mostrar_menu()
         elif opcion == "0":
-            print("Saliendo...")
+            print(FrasesDesarrollador().mostrar_frase())
             break
+            
         else:
             print("Opción no válida.")  
 
