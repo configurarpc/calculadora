@@ -37,3 +37,40 @@ def log_base(x: float, base: float) -> float:
     if base <= 0 or base == 1:
         raise ValueError("La base del logaritmo debe ser positiva y distinta de 1.")
     return math.log(x, base)
+
+# ========================
+# Funciones Exponenciales
+# ========================
+
+def exp_e(x: float) -> float:
+    """
+    Calcula e^x.
+    """
+    return math.exp(x)
+
+
+def exp_base(base: float, x: float) -> float:
+    """
+    Calcula base^x.
+    """
+    return math.pow(base, x)
+
+
+# ========================
+# Funciones Potenciales
+# ========================
+
+def power(base: float, exponent: float) -> float:
+    """
+    Calcula base elevado a la potencia exponent.
+    """
+    return math.pow(base, exponent)
+
+
+def sqrt(x: float) -> float:
+    """
+    Calcula la raíz cuadrada.
+    """
+    if x < 0:
+        raise ValueError("La raíz cuadrada no está definida para números negativos en R.")
+    return math.sqrt(x)
