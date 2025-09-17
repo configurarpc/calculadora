@@ -66,8 +66,8 @@ class InterfazPoligonoIrregular:
         """
         while True:
             print("\n--- Menú de Área de Polígono ---")
-            print("1. Crear Nuevo Polígono y Calcular Área")
-            print("2. Volver al Menú Principal")
+            print("1. Crear nuevo polígono y calcular área")
+            print("0. Volver al menú principal")
             eleccion = input("Selecciona una opción: ").strip()
 
             if eleccion == '1':
@@ -75,7 +75,7 @@ class InterfazPoligonoIrregular:
                 if instancia_poligono:
                     area = instancia_poligono.calcular_area()
                     print(f"\n Resultado: El área del polígono es: {area:.4f}")
-            elif eleccion == '2':
+            elif eleccion == '0':
                 print("Volviendo al menú principal...")
                 break
             else:
