@@ -21,25 +21,22 @@ class Aritmetica:
         else:
             return "Error: división entre cero"
 
-    def ejecutar(self):
+    def mostrar_menu(self):
         while True:
-            print("\n--- CALCULADORA ---")
+            print("\n--- Módulo Aritmética ---")
             print("1. Sumar")
             print("2. Restar")
             print("3. Multiplicar")
             print("4. Dividir")
             print("5. Mostrar último resultado")
-            print("6. Salir")
+            print("0. Volver al menú principal")
 
             opcion = input("Elige una opción: ")
 
-            if opcion == "6":
-                print("¡Adiós!")
+            if opcion == "0":
                 break
-
             elif opcion == "5":
                 print(f"Último resultado: {self.ultimo_resultado}")
-
             elif opcion in ["1", "2", "3", "4"]:
                 try:
                     num1 = float(input("Ingresa el primer número: "))
@@ -56,11 +53,5 @@ class Aritmetica:
 
                 except ValueError:
                     print("Error: Debes ingresar números válidos.")
-
             else:
                 print("Opción no válida. Intenta de nuevo.")
-
-
-if __name__ == "__main__":
-    arit = Aritmetica()
-    arit.ejecutar()
