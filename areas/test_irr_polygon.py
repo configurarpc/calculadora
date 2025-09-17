@@ -86,3 +86,5 @@ def ejecutar_pruebas():
 # Ejecutar las pruebas al correr el script
 if __name__ == "__main__":
     ejecutar_pruebas()
+    InterfazPoligonoIrregular.ejecutar()
+
