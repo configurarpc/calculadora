@@ -1,5 +1,6 @@
 from areas2D import Areas2D
 from areas3D import Areas3D
+from IrrAreas import InterfazPoligonoIrregular
 
 " Clase principal de los cálculos de Áreas"
 
@@ -19,9 +20,12 @@ class Areas:
             elif opcion == "2":
                 Areas3D().menu()
             elif opcion == "3":
-                AreasCustom().menu()
+                InterfazPoligonoIrregular.ejecutar()
             elif opcion == "0":
                 break
             else:
                 print("Opción no válida.")
 
+if __name__ == "__main__":
+    Area  = Areas()
+    Area.mostrar_menu()
