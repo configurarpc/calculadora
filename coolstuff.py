@@ -6,7 +6,7 @@ class FrasesDesarrollador:
     def __init__(self):
         self.frases = [
             "Hola Julian . Sebastian Rodriguez Garcia",
-            "jsjsjjsjsjsj"
+            "Tau mejor que pi. Julian Avila"
         ]
 
     def mostrar_frase(self):
