@@ -1,4 +1,4 @@
-import numpy as np
+amport numpy as np
 import os
 import subprocess
 
