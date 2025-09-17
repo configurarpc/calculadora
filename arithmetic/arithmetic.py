@@ -10,24 +10,37 @@ class Aritmetica:
         self.ultimo_resultado = a - b
         return self.ultimo_resultado
 
+    def multiplicar(self, a, b):
+        self.ultimo_resultado = a * b
+        return self.ultimo_resultado
+
+    def dividir(self, a, b):
+        if b != 0:
+            self.ultimo_resultado = a / b
+            return self.ultimo_resultado
+        else:
+            return "Error: división entre cero"
+
     def ejecutar(self):
         while True:
             print("\n--- CALCULADORA ---")
             print("1. Sumar")
             print("2. Restar")
-            print("3. Mostrar último resultado")
-            print("4. Salir")
+            print("3. Multiplicar")
+            print("4. Dividir")
+            print("5. Mostrar último resultado")
+            print("6. Salir")
 
             opcion = input("Elige una opción: ")
 
-            if opcion == "4":
+            if opcion == "6":
                 print("¡Adiós!")
                 break
 
-            elif opcion == "3":
+            elif opcion == "5":
                 print(f"Último resultado: {self.ultimo_resultado}")
 
-            elif opcion in ["1", "2"]:
+            elif opcion in ["1", "2", "3", "4"]:
                 try:
                     num1 = float(input("Ingresa el primer número: "))
                     num2 = float(input("Ingresa el segundo número: "))
@@ -36,6 +49,10 @@ class Aritmetica:
                         print(f"Resultado: {self.sumar(num1, num2)}")
                     elif opcion == "2":
                         print(f"Resultado: {self.restar(num1, num2)}")
+                    elif opcion == "3":
+                        print(f"Resultado: {self.multiplicar(num1, num2)}")
+                    elif opcion == "4":
+                        print(f"Resultado: {self.dividir(num1, num2)}")
 
                 except ValueError:
                     print("Error: Debes ingresar números válidos.")
