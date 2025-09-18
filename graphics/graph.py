@@ -1,5 +1,5 @@
-from Function_plotting import FunctionPlotter
-from Raw_Lecture import DataPlotter
+from .Function_plotting import FunctionPlotter
+from .Raw_Lecture import DataPlotter
 
 
 class Graph:
